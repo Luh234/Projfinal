@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - Loja de Acessórios e Roupas</title>
+    <title>Catálogo - Loja de Acessórios</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function adicionarAosFavoritos(produtoId, produtoNome) {
+            const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+            if (!favoritos.some(f => f.id === produtoId)) {
+                favoritos.push({ id: produtoId, nome: produtoNome });
+                localStorage.setItem('favoritos', JSON.stringify(favoritos));
+                alert(`${produtoNome} foi adicionado aos favoritos!`);
+            } else {
+                alert(`${produtoNome} já está nos favoritos!`);
+            }
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -12,42 +24,32 @@
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="catalogo.html">Catálogo</a></li>
-                <li><a href="sobre.html">Sobre Nós</a></li>
+                <li><a href="favoritos.html">Meus Favoritos</a></li>
                 <li><a href="contato.html">Contato</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="catalogo">
-        <h1>Nosso Catálogo de Produtos</h1>
-
-        <div class="filtro-categorias">
-            <h3>Filtrar por Categoria</h3>
-            <ul>
-                <li><a href="#">Acessórios</a></li>
-                <li><a href="#">Roupas</a></li>
-            </ul>
+        <h1>Catálogo de Produtos</h1>
+        <div class="produto">
+            <h2>Pulseira Cartier Love</h2>
+            <img src="https://orit.fbitsstatic.net/img/p/pulseira-cartier-love-em-ouro-206874/408145.jpg?w=1500&h=1500&v=no-value" alt="Pulseira Cartier Love" width="200">
+            <p>R$ 42.990,00</p>
+            <button onclick="adicionarAosFavoritos('produto1', 'Pulseira Cartier Love')">Adicionar aos Favoritos</button>
         </div>
 
-        <div class="produtos">
-            <div class="produto">
-                <img src="produto1.jpg" alt="Acessório 1">
-                <p>Acessório Elegante</p>
-                <p>R$ 99,99</p>
-                <a href="produto.html">Ver Detalhes</a>
-            </div>
-            <div class="produto">
-                <img src="produto2.jpg" alt="Roupas 1">
-                <p>Vestido Casual</p>
-                <p>R$ 149,99</p>
-                <a href="produto.html">Ver Detalhes</a>
-            </div>
-            <!-- Adicionar mais produtos -->
+        <div class="produto">
+            <h2>Relógio Cartier Ballon Bleu</h2>
+            <img src="https://relogiosluxurystore.com.br/wp-content/uploads/2021/09/240604950_993042428148858_7174818114025869099_n.jpg.webp" alt="Relógio Cartier Ballon Bleu" width="200">
+            <p>R$ 1.319,00</p>
+            <button onclick="adicionarAosFavoritos('produto2', 'Relógio Cartier Ballon Bleu')">Adicionar aos Favoritos</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Loja de Acessórios e Roupas</p>
+        <p>&copy; 2024 Loja de Acessórios</p>
     </footer>
 </body>
 </html>
+

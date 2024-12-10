@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Favoritos - Loja de Acessórios</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function carregarFavoritos() {
+            const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+            const lista = document.getElementById('lista-favoritos');
+            lista.innerHTML = '';
+
+            if (favoritos.length === 0) {
+                lista.innerHTML = '<p>Você ainda não adicionou favoritos.</p>';
+            } else {
+                favoritos.forEach(f => {
+                    const item = document.createElement('div');
+                    item.className = 'favorito';
+                    item.innerHTML = `
+                        <h3>${f.nome}</h3>
+                        <button onclick="removerFavorito('${f.id}')">Remover</button>
+                    `;
+                    lista.appendChild(item);
+                });
+            }
+        }
+
+        function removerFavorito(produtoId) {
+            let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+            favoritos = favoritos.filter(f => f.id !== produtoId);
+            localStorage.setItem('favoritos', JSON.stringify(favoritos));
+            carregarFavoritos();
+            alert('Produto removido dos favoritos.');
+        }
+
+        window.onload = carregarFavoritos;
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="favoritos.html">Meus Favoritos</a></il>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="favoritos">
+        <h1>Meus Favoritos</h1>
+        <div id="lista-favoritos"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Loja de Acessórios</p>
+    </footer>
+</body>
+</html>
